@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import os
 from wikipediaApi import random_page
 import random
+import logging
 
 # Load environment variables
 load_dotenv()
@@ -59,4 +60,5 @@ async def on_ready():
 
     print(f'{client.user} has connected to Discord!')
 
-client.run(DISCORD_TOKEN)
+handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
+client.run(DISCORD_TOKEN, log_handler=handler)
