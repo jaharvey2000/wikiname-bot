@@ -18,6 +18,10 @@ tree = app_commands.CommandTree(client)
 # Configure /nameme command
 @tree.command(name = 'nameme', description = 'Get a random name')
 async def nameme_command(interaction):
+    if (interaction.channel is None):
+        interaction.response.send_message('This command can only be used in a server!')
+        return
+
     # Defer
     await interaction.response.defer()
 
@@ -34,7 +38,7 @@ async def nameme_command(interaction):
 
     # Send message
     if success:
-        replyMessage = f'Your new name is {page["title"]}!'
+        replyMessage = f'Your new name is "{page["title"]}"!'
     else:
         replyMessage = 'Sorry, I couldn\'t change your name, but here\'s a random Wikipedia article anyway!'
 
